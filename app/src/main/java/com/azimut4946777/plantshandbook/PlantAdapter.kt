@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.azimut4946777.plantshandbook.databinding.PlantItemBinding
 
 class PlantAdapter: RecyclerView.Adapter<PlantAdapter.PalntHolder>() {
-
+         val plantList = ArrayList<Plant>()
     class PalntHolder(item: View): RecyclerView.ViewHolder(item) {
+
         val binding = PlantItemBinding.bind(item)
 
         fun bind(plant: Plant) = with(binding) {
@@ -19,14 +20,19 @@ class PlantAdapter: RecyclerView.Adapter<PlantAdapter.PalntHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PalntHolder {
-        val view: = LayoutInflater.from(parent.context)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.plant_item,parent,false)
+        return PalntHolder(view)
     }
 
     override fun onBindViewHolder(holder: PalntHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(plantList[position])
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return plantList.size
+    }
+    fun addPlant(plant: Plant) {
+        plantList.add(plant)
+        notifyDataSetChanged()
     }
 }
